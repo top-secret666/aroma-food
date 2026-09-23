@@ -1,118 +1,153 @@
-import { useCallback, useEffect, useState } from "react"
 import { Provider } from "react-redux"
-import { Link, Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import EmployeeAPI from "./api/service"
-import "./App.css"
-import Employees from "./pages/employees/Employees"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import Layout from "./components/Layout"
+import ProtectedRoute from "./components/ProtectedRoute"
+import RoleRoute from "./components/RoleRoute"
+import { useAuthBootstrap } from "./hooks/useAuthBootstrap"
+import AdminRestaurantsPage from "./pages/AdminRestaurantsPage"
+import AdminUsersPage from "./pages/AdminUsersPage"
+import CartPage from "./pages/CartPage"
+import CheckoutPage from "./pages/CheckoutPage"
+import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/login/LoginPage"
-import TodosPage from "./pages/todos/TodosPage"
+import OrderDetailPage from "./pages/OrderDetailPage"
+import OrdersPage from "./pages/OrdersPage"
+import ProfilePage from "./pages/ProfilePage"
+import RegisterPage from "./pages/RegisterPage"
+import RestaurantPage from "./pages/RestaurantPage"
 import { store } from "./store/store"
+import "./App.css"
 
-function App() {
-  const [employees, setEmployees] = useState([])
-  const [history, setHistory] = useState([])
-  const [isInitialized, setIsInitialized] = useState(false)
+function AppRoutes() {
+  useAuthBootstrap()
 
-  useEffect(() => {
-    const savedEmployees = localStorage.getItem("employees")
-    const initialEmployees = savedEmployees ? JSON.parse(savedEmployees) : EmployeeAPI.all()
-    setEmployees(initialEmployees)
-    setHistory([initialEmployees])
-    setIsInitialized(true)
-  }, [])
-
-  useEffect(() => {
-    if (isInitialized && employees.length > 0) {
-      localStorage.setItem("employees", JSON.stringify(employees))
-    }
-  }, [employees, isInitialized])
-
-  const handleUndo = useCallback(() => {
-    if (history.length > 1) {
-      const newHistory = history.slice(0, -1)
-      setHistory(newHistory)
-      setEmployees(newHistory[newHistory.length - 1])
-    }
-  }, [history])
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === "z" || e.key === "Z")) {
-        e.preventDefault()
-        handleUndo()
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [handleUndo])
-
-  const updateEmployeesWithHistory = (newEmployees) => {
-    setEmployees(newEmployees)
-    setHistory((prev) => [...prev, newEmployees])
-  }
-
-  const handleAdd = (newEmployee) => {
-    const newEmployees = EmployeeAPI.add(newEmployee, employees)
-    updateEmployeesWithHistory(newEmployees)
-  }
-
-  const handleUpdate = (id, updatedData) => {
-    const newEmployees = EmployeeAPI.update(id, updatedData, employees)
-    updateEmployeesWithHistory(newEmployees)
-  }
-
-  const handleDelete = (id) => {
-    const newEmployees = EmployeeAPI.delete(id, employees)
-    updateEmployeesWithHistory(newEmployees)
-  }
-
-  const handleResetAll = () => {
-    const initialEmployees = EmployeeAPI.all()
-    setEmployees(initialEmployees)
-    setHistory([initialEmployees])
-    localStorage.removeItem("employees")
-  }
-
-    return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <nav style={{ padding: "20px", backgroundColor: "#333", color: "white" }}>
-            <Link to="/login" style={{ color: "white", marginRight: "20px", textDecoration: "none" }}>
-              Логин
-            </Link>
-            <Link to="/employees" style={{ color: "white", marginRight: "20px", textDecoration: "none" }}>
-              Заказы
-            </Link>
-            <Link to="/todos" style={{ color: "white", textDecoration: "none" }}>
-              Рестораны (Reselect Demo)
-            </Link>
-          </nav>
-
-          <div style={{ padding: "20px" }}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/login" replace />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route
-  path="/employees"
-  element={
-    <Employees
-      employees={employees}
-      onAdd={handleAdd}
-      onUpdate={handleUpdate}
-      onDelete={handleDelete}
-      onResetAll={handleResetAll}
-    />
-  }
-/>
-              <Route path="/todos" element={<TodosPage />} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    </Provider>
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <HomePage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/restaurants/:id"
+        element={
+          <Layout>
+            <RestaurantPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <Layout>
+            <CartPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <Layout>
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <Layout>
+            <ProtectedRoute>
+              <OrdersPage />
+            </ProtectedRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/manager/orders"
+        element={
+          <Layout>
+            <RoleRoute allow={["MANAGER", "ADMIN"]}>
+              <OrdersPage desk />
+            </RoleRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <Layout>
+            <RoleRoute allow={["ADMIN"]}>
+              <AdminUsersPage />
+            </RoleRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/admin/restaurants"
+        element={
+          <Layout>
+            <RoleRoute allow={["ADMIN"]}>
+              <AdminRestaurantsPage />
+            </RoleRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/admin"
+        element={<Navigate to="/admin/users" replace />}
+      />
+      <Route
+        path="/orders/:id"
+        element={
+          <Layout>
+            <ProtectedRoute>
+              <OrderDetailPage />
+            </ProtectedRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <Layout>
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          </Layout>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <Layout bare>
+            <LoginPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Layout bare>
+            <RegisterPage />
+          </Layout>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </Provider>
+  )
+}

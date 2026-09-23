@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+# Aroma — React Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Customer, manager, and admin UI for the **Aroma** food delivery platform.
 
-## Available Scripts
+Backend: [`food`](https://github.com/top-secret666/food) (`user-service`, `restaurant-service`, `order-service`)
 
-In the project directory, you can run:
+<p align="center">
+  <img src="docs/screenshots/01-home-hero.png" alt="Aroma hero" width="780" />
+</p>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Role | What you get |
+|------|----------------|
+| **Customer** | Restaurant catalog & filters, menus with images, Redux cart, checkout, order history + live status timeline |
+| **Manager** | Delivery desk — view all orders, update kitchen / delivery status |
+| **Admin** | Account roles (`USER` / `MANAGER` / `ADMIN`), restaurant & dish CRUD |
 
-### `npm test`
+Also: email login, **Google Sign-In**, JWT + refresh via Axios interceptors, protected / role routes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Home | Near you |
+|:----:|:--------:|
+| ![Hero](docs/screenshots/01-home-hero.png) | ![Catalog](docs/screenshots/02-home-catalog.png) |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Restaurant menu | Sign in |
+|:---------------:|:-------:|
+| ![Menu](docs/screenshots/03-restaurant-menu.png) | ![Login](docs/screenshots/04-login.png) |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Empty cart | Register |
+|:----------:|:--------:|
+| ![Cart](docs/screenshots/05-cart-empty.png) | ![Register](docs/screenshots/06-register.png) |
 
-### `npm run eject`
+| Catalog admin | Accounts |
+|:-------------:|:--------:|
+| ![Admin](docs/screenshots/07-admin-catalog.png) | ![Accounts](docs/screenshots/08-admin-accounts.png) |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Delivery desk |
+|:-------------:|
+| ![Manager](docs/screenshots/09-manager-desk.png) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Quick start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 1. Backend (local, no Docker)
 
-## Learn More
+From the sibling `food` repo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```powershell
+.\start-local.ps1
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Frontend
 
-### Code Splitting
+```bash
+cp .env.example .env
+npm install
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+App: **http://localhost:3000**
 
-### Analyzing the Bundle Size
+### Environment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `REACT_APP_USER_API` | `http://localhost:8084` | user-service |
+| `REACT_APP_RESTAURANT_API` | `http://localhost:8081` | restaurant-service |
+| `REACT_APP_ORDER_API` | `http://localhost:8082` | order-service |
+| `REACT_APP_GOOGLE_CLIENT_ID` | *(empty)* | Google OAuth **Web** Client ID |
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Demo accounts
 
-### Advanced Configuration
+Password for all: **`aroma123`**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Email | Role | Lands on |
+|-------|------|----------|
+| `user@aroma.app` | Customer | Home / restaurants |
+| `manager@aroma.app` | Manager | `/manager/orders` |
+| `admin@aroma.app` | Admin | `/admin/restaurants` |
 
-### Deployment
+### Google Sign-In
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Create an OAuth 2.0 **Web application** client in Google Cloud Console  
+2. Authorized JavaScript origins: `http://localhost:3000`  
+3. Put the Client ID in `.env` as `REACT_APP_GOOGLE_CLIENT_ID`  
+4. Use the **same** value as `GOOGLE_CLIENT_ID` for `user-service`  
+5. Restart `npm start` (CRA reads env at boot)
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project structure
+
+```text
+react_fistapp/
+├── docs/screenshots/     README images
+├── public/
+├── src/
+│   ├── api/              Axios clients + interceptors
+│   ├── components/       Layout, Navbar, route guards
+│   ├── hooks/            Auth bootstrap
+│   ├── pages/            Home, menu, cart, checkout, orders, admin…
+│   ├── store/            Redux Toolkit (auth + cart)
+│   └── utils/            Roles, formatting
+├── .env.example
+├── Dockerfile
+├── vercel.json
+└── README.md
+```
+
+---
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Dev server on `:3000` |
+| `npm run build` | Production bundle → `build/` |
+| `npm test` | CRA test runner |
+
+---
+
+## Deploy
+
+### Vercel
+
+1. Import this repo  
+2. Set `REACT_APP_USER_API`, `REACT_APP_RESTAURANT_API`, `REACT_APP_ORDER_API` to public API URLs  
+3. Optionally set `REACT_APP_GOOGLE_CLIENT_ID` and add the Vercel origin in Google Cloud  
+4. Ensure backend `CORS_ALLOWED_ORIGINS` includes your Vercel domain  
+
+`vercel.json` already rewrites SPA routes to `index.html`.
+
+### Docker
+
+```bash
+docker build \
+  --build-arg REACT_APP_USER_API=https://your-user-api \
+  --build-arg REACT_APP_RESTAURANT_API=https://your-restaurant-api \
+  --build-arg REACT_APP_ORDER_API=https://your-order-api \
+  -t aroma-frontend .
+
+docker run --rm -p 3000:80 aroma-frontend
+```
+
+---
+
+## Stack
+
+- React 19 + Create React App  
+- Redux Toolkit + react-redux  
+- react-router-dom  
+- Axios (Bearer + refresh interceptors)  
+- Google Identity Services  
+
+---
+
+## Author
+
+Dana Stukalova

@@ -1,8 +1,10 @@
-name: Deploy GitHub Pages
+# Optional: deploy via GitHub Actions (repo also ships a classic `gh-pages` branch).
+# Prefer the `gh-pages` branch source in Settings → Pages.
+# Use this workflow only if you switch Pages to "GitHub Actions".
+
+name: Deploy GitHub Pages (Actions)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -29,12 +31,8 @@ jobs:
           CI: true
           PUBLIC_URL: /react_fistapp
           REACT_APP_GOOGLE_CLIENT_ID: ${{ vars.REACT_APP_GOOGLE_CLIENT_ID }}
-          REACT_APP_USER_API: ${{ vars.REACT_APP_USER_API }}
-          REACT_APP_RESTAURANT_API: ${{ vars.REACT_APP_RESTAURANT_API }}
-          REACT_APP_ORDER_API: ${{ vars.REACT_APP_ORDER_API }}
         run: npm run build
-      - name: SPA fallback for GitHub Pages
-        run: cp build/index.html build/404.html
+      - run: cp build/index.html build/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: build

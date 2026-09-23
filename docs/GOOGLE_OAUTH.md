@@ -16,6 +16,7 @@ Add **exactly** these (no trailing slash):
 ```text
 http://localhost:3000
 https://reactfistapp.vercel.app
+https://top-secret666.github.io
 ```
 
 If you use a preview URL, add it too, for example:

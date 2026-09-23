@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react_fistapp/static/css/main.18d9ccf7.css",
+    "main.js": "/react_fistapp/static/js/main.696c69b9.js",
+    "static/js/453.00768de6.chunk.js": "/react_fistapp/static/js/453.00768de6.chunk.js",
+    "index.html": "/react_fistapp/index.html",
+    "main.18d9ccf7.css.map": "/react_fistapp/static/css/main.18d9ccf7.css.map",
+    "main.696c69b9.js.map": "/react_fistapp/static/js/main.696c69b9.js.map",
+    "453.00768de6.chunk.js.map": "/react_fistapp/static/js/453.00768de6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.18d9ccf7.css",
+    "static/js/main.696c69b9.js"
+  ]
+}

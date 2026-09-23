@@ -145,7 +145,7 @@ function AppRoutes() {
 export default function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL || ""}>
         <AppRoutes />
       </BrowserRouter>
     </Provider>

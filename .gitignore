@@ -35,3 +35,13 @@ yarn-debug.log*
 yarn-error.log*
 
 .vercel
+
+# Published on GitHub: src + public + docs + README only
+.env.example
+.github/
+nginx.conf
+package.json
+package-lock.json
+vercel.json
+netlify.toml
+Dockerfile

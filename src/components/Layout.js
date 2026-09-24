@@ -7,7 +7,7 @@ export default function Layout({ children, bare = false }) {
       <main className="shell__main">{children}</main>
       {!bare && (
         <footer className="footer">
-          <p>Aroma · food delivery</p>
+          <p>Aroma Food · delivery</p>
         </footer>
       )}
     </div>

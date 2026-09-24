@@ -69,7 +69,7 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero__veil" aria-hidden="true" />
         <div className="hero__content">
-          <p className="hero__brand">Aroma</p>
+          <p className="hero__brand">Aroma Food</p>
           <h1 className="hero__title">ВОЗЬМИТЕ НА РАБОТУ Я ОЧЕНЬ  СТАРАЛЬСЯ АААААААА</h1>
           <p className="hero__lead">позязя пж  пожлуйстааааааа</p>
           <div className="hero__cta">

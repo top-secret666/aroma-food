@@ -1,6 +1,6 @@
-# Aroma — React Frontend
+# Aroma Food — React Frontend
 
-Customer, manager, and admin UI for the **Aroma** food delivery platform.
+Customer, manager, and admin UI for the **Aroma Food** delivery platform.
 
 Backend: [`food`](https://github.com/top-secret666/food) (`user-service`, `restaurant-service`, `order-service`)
 
@@ -8,8 +8,9 @@ Backend: [`food`](https://github.com/top-secret666/food) (`user-service`, `resta
 
 | Host | URL |
 |------|-----|
-| **Production (Vercel)** | **https://reactfistapp.vercel.app** |
-| GitHub Pages | https://top-secret666.github.io/react_fistapp/ |
+| **Production (Vercel)** | **https://aroma-food.vercel.app** |
+| Legacy alias | https://reactfistapp.vercel.app |
+| GitHub Pages | https://top-secret666.github.io/aroma-food/ |
 
 <p align="center">
   <img src="docs/screenshots/01-home-hero.png" alt="Aroma hero" width="780" />
@@ -107,7 +108,7 @@ Password for all: **`aroma123`**
 ## Project structure
 
 ```text
-react_fistapp/
+react_fistapp/   (local folder; GitHub repo: aroma-food)
 ├── docs/screenshots/     README images
 ├── public/
 ├── src/

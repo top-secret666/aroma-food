@@ -17,9 +17,9 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="nav__inner">
-        <Link to={homePathForRoles(roles)} className="nav__brand" aria-label="Aroma home">
-          <span className="nav__mark" aria-hidden="true" />
-          <span className="nav__name">Aroma</span>
+        <Link to={homePathForRoles(roles)} className="nav__brand" aria-label="Aroma Food home">
+          <img className="nav__mark-img" src="/favicon.png" alt="" width="28" height="28" />
+          <span className="nav__name">Aroma Food</span>
         </Link>
 
         <nav className="nav__links" aria-label="Main">

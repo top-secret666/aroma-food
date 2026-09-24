@@ -112,6 +112,15 @@ textarea {
   animation: markPulse 3.2s ease-in-out infinite;
 }
 
+.nav__mark-img {
+  width: 1.55rem;
+  height: 1.55rem;
+  object-fit: contain;
+  border-radius: 0.35rem;
+  display: block;
+  flex-shrink: 0;
+}
+
 .nav__name {
   font-family: var(--font-display);
   font-weight: 700;
@@ -243,11 +252,22 @@ textarea {
 
 .hero__title {
   margin: 0;
-  max-width: 14ch;
+  max-width: none;
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-size: clamp(1.05rem, 2.4vw, 1.85rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 720px) {
+  .hero__title {
+    white-space: normal;
+    font-size: clamp(1.15rem, 4.2vw, 1.55rem);
+  }
 }
 
 .hero__lead {

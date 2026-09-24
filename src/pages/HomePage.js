@@ -70,8 +70,8 @@ export default function HomePage() {
         <div className="hero__veil" aria-hidden="true" />
         <div className="hero__content">
           <p className="hero__brand">Aroma</p>
-          <h1 className="hero__title">What are we eating today?</h1>
-          <p className="hero__lead">Pick a kitchen nearby — like food delivery should feel.</p>
+          <h1 className="hero__title">ВОЗЬМИТЕ НА РАБОТУ Я ОЧЕНЬ  СТАРАЛЬСЯ АААААААА</h1>
+          <p className="hero__lead">позязя пж  пожлуйстааааааа</p>
           <div className="hero__cta">
             <a href="#catalog" className="btn btn--primary">
               Browse restaurants

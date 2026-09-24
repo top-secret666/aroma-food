@@ -9,7 +9,8 @@ const ORDER_API = process.env.REACT_APP_ORDER_API || "http://localhost:8082"
 function createClient(baseURL) {
   const instance = axios.create({
     baseURL,
-    timeout: 8000,
+    // Render free tier cold-starts can exceed 8s
+    timeout: 60000,
     headers: { Accept: "application/json" },
   })
 

@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 import { Provider } from "react-redux"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { wakeBackendApis } from "./api/wakeApis"
 import Layout from "./components/Layout"
 import ProtectedRoute from "./components/ProtectedRoute"
 import RoleRoute from "./components/RoleRoute"
@@ -20,6 +22,9 @@ import "./App.css"
 
 function AppRoutes() {
   useAuthBootstrap()
+  useEffect(() => {
+    wakeBackendApis()
+  }, [])
 
   return (
     <Routes>

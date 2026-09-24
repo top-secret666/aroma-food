@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { authApi, userApi } from "../../api/client"
+import { wakeBackendApis } from "../../api/wakeApis"
 import { setCredentials, setUser } from "../../store/authSlice"
 import { homePathForRoles, normalizeRoles } from "../../utils/auth"
 
@@ -67,6 +68,10 @@ export default function LoginPage() {
     const fallback = location.state?.from
     navigate(fallback || homePathForRoles(roles), { replace: true })
   }
+
+  useEffect(() => {
+    wakeBackendApis()
+  }, [])
 
   useEffect(() => {
     if (accessToken && user) {

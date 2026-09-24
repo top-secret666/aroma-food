@@ -9,8 +9,8 @@ const ORDER_API = process.env.REACT_APP_ORDER_API || "http://localhost:8082"
 function createClient(baseURL) {
   const instance = axios.create({
     baseURL,
-    // Render free tier cold-starts can exceed 8s
-    timeout: 60000,
+    // Render free tier cold-starts often need 30–90s
+    timeout: 90000,
     headers: { Accept: "application/json" },
   })
 
@@ -47,10 +47,15 @@ function createClient(baseURL) {
       }
 
       const payload = error.response?.data
-      const message =
+      let message =
         (payload && (payload.message || payload.error || payload.error_description)) ||
         error.message ||
         "Request failed"
+      if (error.code === "ECONNABORTED" || /timeout/i.test(String(message))) {
+        message = "Server is waking up (Render free tier). Wait ~1 min and try again."
+      } else if (!error.response && /Network Error/i.test(String(message))) {
+        message = "Cannot reach API (CORS or offline). Try again in a moment."
+      }
       const err = new Error(typeof message === "string" ? message : "Request failed")
       err.status = status || 0
       err.data = payload

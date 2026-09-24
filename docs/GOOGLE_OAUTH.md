@@ -15,6 +15,7 @@ Add **exactly** these (no trailing slash):
 
 ```text
 http://localhost:3000
+https://aromafood.vercel.app
 https://reactfistapp.vercel.app
 https://top-secret666.github.io
 ```
@@ -22,7 +23,7 @@ https://top-secret666.github.io
 If you use a preview URL, add it too, for example:
 
 ```text
-https://reactfistapp-nt5ap1d6c-top-secret666-2624s-projects.vercel.app
+https://aroma-food-git-main-top-secret666-2624s-projects.vercel.app
 ```
 
 ## 3. Authorized redirect URIs
@@ -32,6 +33,7 @@ If the console asks for at least one URI, you can add:
 
 ```text
 http://localhost:3000
+https://aromafood.vercel.app
 https://reactfistapp.vercel.app
 ```
 
@@ -50,6 +52,6 @@ Click **Save**, wait ~1–2 minutes, hard-refresh the site (`Ctrl+Shift+R`).
 ## Check
 
 1. Local: http://localhost:3000/login → Google button  
-2. Prod: https://reactfistapp.vercel.app/login → Google button  
+2. Prod: https://aromafood.vercel.app/login → Google button  
 
 If login succeeds but the server returns 401, restart `user-service` with the same `GOOGLE_CLIENT_ID`.

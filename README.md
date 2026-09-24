@@ -8,10 +8,11 @@ Backend: [`food`](https://github.com/top-secret666/food) (`user-service`, `resta
 
 | Host | URL |
 |------|-----|
-| **Production (Vercel)** | **https://aroma-food.vercel.app** |
-| Alt alias | https://aromafood.vercel.app |
+| **Production (Vercel)** | **https://aromafood.vercel.app** |
 | Legacy alias | https://reactfistapp.vercel.app |
 | GitHub Pages | https://top-secret666.github.io/aroma-food/ |
+
+> Note: `aroma-food.vercel.app` is already taken on Vercel by another project — use **aromafood.vercel.app**.
 
 <p align="center">
   <img src="docs/screenshots/01-home-hero.png" alt="Aroma hero" width="780" />

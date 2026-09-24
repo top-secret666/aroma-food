@@ -34,7 +34,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.vercel
 
 # Published on GitHub: src + public + docs + README only
 .env.example
@@ -42,6 +41,7 @@ yarn-error.log*
 nginx.conf
 package.json
 package-lock.json
-vercel.json
 netlify.toml
 Dockerfile
+
+.vercel

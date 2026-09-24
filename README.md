@@ -172,7 +172,6 @@ docker run --rm -p 3000:80 aroma-frontend
 - Google Identity Services  
 
 ---
-
-## Author
-
-Dana Stukalova
+<p align="center">
+<img width="540" height="270" alt="63cd83d5424d2c58f6c76919e3e77ac8" src="https://github.com/user-attachments/assets/fd6fd8d4-c184-4130-9b43-f3b6f7422650" />
+</p>

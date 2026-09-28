@@ -35,12 +35,10 @@ yarn-debug.log*
 yarn-error.log*
 
 
-# Published on GitHub: src + public + docs + README only
+# Published on GitHub: src + public + docs + README + package manifests
 .env.example
 .github/
 nginx.conf
-package.json
-package-lock.json
 netlify.toml
 Dockerfile
 
